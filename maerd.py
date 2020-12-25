@@ -30,8 +30,8 @@ class App:
         player.player_update()
 
     def draw(self):
+        px.cls(0)
         if self.map == 0:
-            px.cls(0)
             px.bltm(0, 0, 0, 0, 0, 32, 32)
             px.blt(player.x, player.y, 0, 0, 48, 16, 16, 0)
             px.blt(player.x + 16, player.y, 0, 0, 64, 16, 16, 0)
