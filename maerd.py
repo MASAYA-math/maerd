@@ -31,6 +31,8 @@ class App:
 
     def update(self):
         player.player_update()
+        if player.y < 16:
+            self.map = 1
 
     def draw(self):
         px.cls(0)
@@ -38,6 +40,8 @@ class App:
             px.bltm(0, 0, 0, 0, 0, 32, 32)
             player.player_draw()
             px.blt(player.x + 16, player.y, 0, 0, 64, 16, 16, 0)
+        elif self.map == 1:
+            pass
 
 
 App()
