@@ -15,6 +15,9 @@ class Player:
         if px.btn(px.KEY_S):
             player.y += 1
 
+    def player_draw(self):
+        px.blt(player.x, player.y, 0, 0, 48, 16, 16, 0)
+
 
 player = Player(112, 128)
 
@@ -33,7 +36,7 @@ class App:
         px.cls(0)
         if self.map == 0:
             px.bltm(0, 0, 0, 0, 0, 32, 32)
-            px.blt(player.x, player.y, 0, 0, 48, 16, 16, 0)
+            player.player_draw()
             px.blt(player.x + 16, player.y, 0, 0, 64, 16, 16, 0)
 
 
