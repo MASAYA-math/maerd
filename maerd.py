@@ -1,6 +1,11 @@
 import pyxel as px
 
 
+class Player:
+    def __init__(self):
+        self.x, self.y = 0, 0
+
+
 class App:
     def __init__(self):
         px.init(256, 256, caption="MAERD")
