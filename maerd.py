@@ -9,26 +9,41 @@ class Player:
         self.x, self.y = x, y
 
     def update(self):
-        if px.btn(px.KEY_D):
+        _, forbidden_direction = is_col_flagged(self)
+        print(forbidden_direction)
+        if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
-        if px.btn(px.KEY_A):
+        if px.btn(px.KEY_A) and not forbidden_direction["A"]:
             self.x += -1
-        if px.btn(px.KEY_W):
+        if px.btn(px.KEY_W) and not forbidden_direction["W"]:
             self.y += -1
-        if px.btn(px.KEY_S):
+        if px.btn(px.KEY_S) and not forbidden_direction["S"]:
             self.y += 1
 
     def draw(self):
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
 
-def is_col_flagged(player: Player) -> bool:
+def is_col_flagged(player: Player) -> tuple:
+    forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
     for i in range(0, len(col_blocks)):
         if (abs(player.x - col_blocks[i][0]) <= 16 and
                 abs(player.y - col_blocks[i][1]) <= 16):
-            return True
+            if player.x - col_blocks[i][0] + 16 >= 16 and\
+                    abs(player.y - col_blocks[i][1]) != 16:
+                forbidden_direction["A"] = True
+            if player.x - col_blocks[i][0] + -16 < -16 and\
+                    abs(player.y - col_blocks[i][1]) != 16:
+                forbidden_direction["D"] = True
+            if player.y - col_blocks[i][1] + 16 >= 16 and\
+                    abs(player.x - col_blocks[i][0]) != 16:
+                forbidden_direction["W"] = True
+            if player.y - col_blocks[i][1] + -16 < -16 and\
+                    abs(player.x - col_blocks[i][0]) != 16:
+                forbidden_direction["S"] = True
+            return True, forbidden_direction
         else:
-            return False
+            return False, forbidden_direction
 
 
 class App:
