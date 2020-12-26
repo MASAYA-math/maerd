@@ -22,7 +22,7 @@ class Player:
 class App:
     def __init__(self):
         px.init(256, 256, caption="MAERD")
-        px.load("resource.pyxres")
+        px.load("assets/resource.pyxres")
         self.map = 0
         self.player = Player(112, 128)
         px.run(self.update, self.draw)
