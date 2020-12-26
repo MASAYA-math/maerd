@@ -16,7 +16,7 @@ class Player:
         self.x, self.y = x, y
 
     def update(self):
-        forbidden_direction = is_col_flagged(self)
+        forbidden_direction = self.is_col_flagged()
         print(forbidden_direction)
         if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
@@ -30,27 +30,26 @@ class Player:
     def draw(self):
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
-
-def is_col_flagged(player: Player) -> dict:
-    forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
-    for i in range(0, len(col_blocks)):
-        if (abs(player.x - col_blocks[i].x) <= 16 and
-                abs(player.y - col_blocks[i].y) <= 16):
-            if player.x - col_blocks[i].x + 16 >= 16 and\
-                    abs(player.y - col_blocks[i].y) != 16:
-                forbidden_direction["A"] = True
-            if player.x - col_blocks[i].x + -16 < -16 and\
-                    abs(player.y - col_blocks[i].y) != 16:
-                forbidden_direction["D"] = True
-            if player.y - col_blocks[i].y + 16 >= 16 and\
-                    abs(player.x - col_blocks[i].x) != 16:
-                forbidden_direction["W"] = True
-            if player.y - col_blocks[i].y + -16 < -16 and\
-                    abs(player.x - col_blocks[i].x) != 16:
-                forbidden_direction["S"] = True
-            return forbidden_direction
-        else:
-            return forbidden_direction
+    def is_col_flagged(self) -> dict:
+        forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
+        for i in range(0, len(col_blocks)):
+            if (abs(self.x - col_blocks[i].x) <= 16 and
+                    abs(self.y - col_blocks[i].y) <= 16):
+                if self.x - col_blocks[i].x + 16 >= 16 and\
+                        abs(self.y - col_blocks[i].y) != 16:
+                    forbidden_direction["A"] = True
+                if self.x - col_blocks[i].x + -16 < -16 and\
+                        abs(self.y - col_blocks[i].y) != 16:
+                    forbidden_direction["D"] = True
+                if self.y - col_blocks[i].y + 16 >= 16 and\
+                        abs(self.x - col_blocks[i].x) != 16:
+                    forbidden_direction["W"] = True
+                if self.y - col_blocks[i].y + -16 < -16 and\
+                        abs(self.x - col_blocks[i].x) != 16:
+                    forbidden_direction["S"] = True
+                return forbidden_direction
+            else:
+                return forbidden_direction
 
 
 class App:
