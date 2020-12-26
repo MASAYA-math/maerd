@@ -1,7 +1,14 @@
 import pyxel as px
 
 
-col_blocks = [[24, 0]]
+class Block:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+
+block = Block(24, 0)
+
+col_blocks = [block]
 
 
 class Player:
@@ -27,19 +34,19 @@ class Player:
 def is_col_flagged(player: Player) -> dict:
     forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
     for i in range(0, len(col_blocks)):
-        if (abs(player.x - col_blocks[i][0]) <= 16 and
-                abs(player.y - col_blocks[i][1]) <= 16):
-            if player.x - col_blocks[i][0] + 16 >= 16 and\
-                    abs(player.y - col_blocks[i][1]) != 16:
+        if (abs(player.x - col_blocks[i].x) <= 16 and
+                abs(player.y - col_blocks[i].y) <= 16):
+            if player.x - col_blocks[i].x + 16 >= 16 and\
+                    abs(player.y - col_blocks[i].y) != 16:
                 forbidden_direction["A"] = True
-            if player.x - col_blocks[i][0] + -16 < -16 and\
-                    abs(player.y - col_blocks[i][1]) != 16:
+            if player.x - col_blocks[i].x + -16 < -16 and\
+                    abs(player.y - col_blocks[i].y) != 16:
                 forbidden_direction["D"] = True
-            if player.y - col_blocks[i][1] + 16 >= 16 and\
-                    abs(player.x - col_blocks[i][0]) != 16:
+            if player.y - col_blocks[i].y + 16 >= 16 and\
+                    abs(player.x - col_blocks[i].x) != 16:
                 forbidden_direction["W"] = True
-            if player.y - col_blocks[i][1] + -16 < -16 and\
-                    abs(player.x - col_blocks[i][0]) != 16:
+            if player.y - col_blocks[i].y + -16 < -16 and\
+                    abs(player.x - col_blocks[i].x) != 16:
                 forbidden_direction["S"] = True
             return forbidden_direction
         else:
