@@ -14,7 +14,7 @@ class EventBlock(CollisionBlock):
     pass
 
 
-def make_map_instance(source):
+def make_map_instance(source, events):
     map_data_instance = []
     for i in range(0, len(source)):
         map_data_instance.append([])
@@ -23,6 +23,6 @@ def make_map_instance(source):
                 map_data_instance[i].append(EmptyBlock())
             elif source[i][j] == 1:
                 map_data_instance[i].append(CollisionBlock())
-            elif source[i][j] == 2:
-                map_data_instance[i].append(EventBlock())
+            else:
+                map_data_instance[i].append(events[source[i][j] - 2]())
     return map_data_instance
