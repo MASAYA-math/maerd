@@ -12,11 +12,6 @@ class Block:
         self.x, self.y = x, y
 
 
-block = Block(16, 0)
-
-map_data = [block]
-
-
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
