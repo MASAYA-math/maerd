@@ -7,6 +7,16 @@ def convert_coordinates():
     pass
 
 
+def is_on_collision(player, map_data) -> list:
+    on_collision_list = []
+    for i in range(0, len(map_data)):
+        for j in range(0, len(map_data[i])):
+            if isinstance(map_data[i][j], engine.CollisionBlock) and\
+                    abs(player.x - j*16) <= 16 and abs(player.y - i*16) <= 16:
+                on_collision_list.append((i, j, map_data[i][j], True))
+    return on_collision_list
+
+
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
@@ -27,22 +37,19 @@ class Player:
 
     def handle_collision(self, map_data) -> dict:
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
-        for i in range(0, len(map_data)):
-            for j in range(0, len(map_data[i])):
-                if isinstance(map_data[i][j], engine.CollisionBlock) and\
-                        abs(self.x - j*16) <= 16 and abs(self.y - i*16) <= 16:
-                    if self.x - j*16 + 16 >= 16 and\
-                            abs(self.y - i*16) != 16:
-                        forbidden_direction["A"] = True
-                    if self.x - j*16 + -16 < -16 and\
-                            abs(self.y - i*16) != 16:
-                        forbidden_direction["D"] = True
-                    if self.y - i*16 + 16 >= 16 and\
-                            abs(self.x - j*16) != 16:
-                        forbidden_direction["W"] = True
-                    if self.y - i*16 + -16 < -16 and\
-                            abs(self.x - j*16) != 16:
-                        forbidden_direction["S"] = True
+        for elm in is_on_collision(self, map_data):
+            if self.x - elm[1]*16 + 16 >= 16 and\
+                    abs(self.y - elm[0]*16) != 16:
+                forbidden_direction["A"] = True
+            if self.x - elm[1]*16 + -16 < -16 and\
+                    abs(self.y - elm[0]*16) != 16:
+                forbidden_direction["D"] = True
+            if self.y - elm[0]*16 + 16 >= 16 and\
+                    abs(self.x - elm[1]*16) != 16:
+                forbidden_direction["W"] = True
+            if self.y - elm[0]*16 + -16 < -16 and\
+                    abs(self.x - elm[1]*16) != 16:
+                forbidden_direction["S"] = True
         return forbidden_direction
 
 
