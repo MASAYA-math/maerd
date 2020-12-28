@@ -37,7 +37,7 @@ class Player:
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
     def is_col_flagged(self, map_data) -> dict:
-        # TODO Change implement of this function to be able to use map_data instead of before data.
+        # TODO Change implement of this function to be able to use map_data instead of before data format.
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
         for i in range(0, len(map_data)):
             if (abs(self.x - map_data[i].x) <= 16 and
