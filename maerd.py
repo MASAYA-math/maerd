@@ -22,7 +22,8 @@ class Player:
         self.x, self.y = x, y
 
     def update(self, map_data):
-        forbidden_direction = self.handle_collision(map_data)
+        collision_list = is_on_collision(self, map_data)
+        forbidden_direction = self.handle_collision(collision_list)
         if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
         if px.btn(px.KEY_A) and not forbidden_direction["A"]:
@@ -35,9 +36,9 @@ class Player:
     def draw(self):
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
-    def handle_collision(self, map_data) -> dict:
+    def handle_collision(self, collision_list) -> dict:
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
-        for elm in is_on_collision(self, map_data):
+        for elm in collision_list:
             if self.x - elm[1]*16 + 16 >= 16 and\
                     abs(self.y - elm[0]*16) != 16:
                 forbidden_direction["A"] = True
