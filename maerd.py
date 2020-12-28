@@ -1,5 +1,5 @@
 import pyxel as px
-from engine import main
+from engine import engine
 import map0
 
 
@@ -20,6 +20,7 @@ col_blocks = [block]
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
+        self.map0 = map0.Map()
 
     def update(self):
         forbidden_direction = self.is_col_flagged()
