@@ -1,4 +1,6 @@
 import pyxel as px
+from engine import main
+import map0
 
 
 def convert_coordinates():
@@ -10,7 +12,7 @@ class Block:
         self.x, self.y = x, y
 
 
-block = Block(24, 0)
+block = Block(16, 0)
 
 col_blocks = [block]
 
