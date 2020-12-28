@@ -40,23 +40,22 @@ class Player:
         # TODO Change implement of this function to be able to use map_data instead of before data format.
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
         for i in range(0, len(map_data)):
-            if (abs(self.x - map_data[i].x) <= 16 and
-                    abs(self.y - map_data[i].y) <= 16):
-                if self.x - map_data[i].x + 16 >= 16 and\
-                        abs(self.y - map_data[i].y) != 16:
-                    forbidden_direction["A"] = True
-                if self.x - map_data[i].x + -16 < -16 and\
-                        abs(self.y - map_data[i].y) != 16:
-                    forbidden_direction["D"] = True
-                if self.y - map_data[i].y + 16 >= 16 and\
-                        abs(self.x - map_data[i].x) != 16:
-                    forbidden_direction["W"] = True
-                if self.y - map_data[i].y + -16 < -16 and\
-                        abs(self.x - map_data[i].x) != 16:
-                    forbidden_direction["S"] = True
-                return forbidden_direction
-            else:
-                return forbidden_direction
+            for j in range(0, len(map_data[i])):
+                if isinstance(map_data[i][j], engine.CollisionBlock) and\
+                        abs(self.x - j*16) <= 16 and abs(self.y - i*16) <= 16:
+                    if self.x - j*16 + 16 >= 16 and\
+                            abs(self.y - i*16) != 16:
+                        forbidden_direction["A"] = True
+                    if self.x - j*16 + -16 < -16 and\
+                            abs(self.y - i*16) != 16:
+                        forbidden_direction["D"] = True
+                    if self.y - i*16 + 16 >= 16 and\
+                            abs(self.x - j*16) != 16:
+                        forbidden_direction["W"] = True
+                    if self.y - i*16 + -16 < -16 and\
+                            abs(self.x - j*16) != 16:
+                        forbidden_direction["S"] = True
+        return forbidden_direction
 
 
 class App:
