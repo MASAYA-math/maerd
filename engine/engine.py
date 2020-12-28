@@ -10,8 +10,12 @@ class CollisionBlock(Block):
     pass
 
 
-class EventBlock(CollisionBlock):
-    pass
+class EventBlock(Block):
+    def update_event_handler(self):
+        pass
+
+    def draw_event_handler(self):
+        pass
 
 
 def make_map_instance(source, events):

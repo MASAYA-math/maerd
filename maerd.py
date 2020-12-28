@@ -20,10 +20,14 @@ def is_on_collision(player, map_data) -> list:
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
+        self.map_number = 0
 
     def update(self, map_data):
-        collision_list = is_on_collision(self, map_data)
-        forbidden_direction = self.handle_collision(collision_list)
+        self.collision_list = is_on_collision(self, map_data)
+        for elm in self.collision_list:
+            if isinstance(elm[2], engine.EventBlock):
+                elm[2].update_event_handler(self)
+        forbidden_direction = self.handle_collision(self.collision_list)
         if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
         if px.btn(px.KEY_A) and not forbidden_direction["A"]:
@@ -34,6 +38,9 @@ class Player:
             self.y += 1
 
     def draw(self):
+        for elm in self.collision_list:
+            if isinstance(elm[2], engine.EventBlock):
+                elm[2].draw_event_handler(self)
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
     def handle_collision(self, collision_list) -> dict:
@@ -58,7 +65,6 @@ class App:
     def __init__(self):
         px.init(256, 256, caption="MAERD")
         px.load("assets/resource.pyxres")
-        self.map = 0
         self.player = Player(112, 128)
         self.map0 = map0.Map()
         px.run(self.update, self.draw)
@@ -68,12 +74,12 @@ class App:
 
     def draw(self):
         px.cls(0)
-        if self.map == 0:
+        if self.player.map_number == 0:
             px.bltm(0, 0, 0, 0, 0, 32, 32)
             self.player.draw()
             px.blt(self.player.x + 16, self.player.y, 0, 0, 64, 16, 16, 0)
-        elif self.map == 1:
-            self.player.draw()
+        else:
+            px.text(64, 64, "NEXT STAGE", 8)
 
 
 App()
