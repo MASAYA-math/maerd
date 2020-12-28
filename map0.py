@@ -15,9 +15,6 @@ map_data_source = [
 map_data_instance = engine.make_map_instance(map_data_source)
 
 
-print(map_data_instance)
-
-
 class Map:
     def __init__(self):
         self.map_data = map_data_instance

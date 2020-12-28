@@ -22,8 +22,7 @@ class Player:
         self.x, self.y = x, y
 
     def update(self, map_data):
-        forbidden_direction = self.is_col_flagged(map_data)
-        print(forbidden_direction)
+        forbidden_direction = self.handle_collision(map_data)
         if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
         if px.btn(px.KEY_A) and not forbidden_direction["A"]:
@@ -36,8 +35,7 @@ class Player:
     def draw(self):
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
-    def is_col_flagged(self, map_data) -> dict:
-        # TODO Change implement of this function to be able to use map_data instead of before data format.
+    def handle_collision(self, map_data) -> dict:
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
         for i in range(0, len(map_data)):
             for j in range(0, len(map_data[i])):
