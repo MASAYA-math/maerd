@@ -14,16 +14,15 @@ class Block:
 
 block = Block(16, 0)
 
-col_blocks = [block]
+map_data = [block]
 
 
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
-        self.map0 = map0.Map()
 
-    def update(self):
-        forbidden_direction = self.is_col_flagged()
+    def update(self, map_data):
+        forbidden_direction = self.is_col_flagged(map_data)
         print(forbidden_direction)
         if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
@@ -37,22 +36,23 @@ class Player:
     def draw(self):
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
-    def is_col_flagged(self) -> dict:
+    def is_col_flagged(self, map_data) -> dict:
+        # TODO Change implement of this function to be able to use map_data instead of before data.
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
-        for i in range(0, len(col_blocks)):
-            if (abs(self.x - col_blocks[i].x) <= 16 and
-                    abs(self.y - col_blocks[i].y) <= 16):
-                if self.x - col_blocks[i].x + 16 >= 16 and\
-                        abs(self.y - col_blocks[i].y) != 16:
+        for i in range(0, len(map_data)):
+            if (abs(self.x - map_data[i].x) <= 16 and
+                    abs(self.y - map_data[i].y) <= 16):
+                if self.x - map_data[i].x + 16 >= 16 and\
+                        abs(self.y - map_data[i].y) != 16:
                     forbidden_direction["A"] = True
-                if self.x - col_blocks[i].x + -16 < -16 and\
-                        abs(self.y - col_blocks[i].y) != 16:
+                if self.x - map_data[i].x + -16 < -16 and\
+                        abs(self.y - map_data[i].y) != 16:
                     forbidden_direction["D"] = True
-                if self.y - col_blocks[i].y + 16 >= 16 and\
-                        abs(self.x - col_blocks[i].x) != 16:
+                if self.y - map_data[i].y + 16 >= 16 and\
+                        abs(self.x - map_data[i].x) != 16:
                     forbidden_direction["W"] = True
-                if self.y - col_blocks[i].y + -16 < -16 and\
-                        abs(self.x - col_blocks[i].x) != 16:
+                if self.y - map_data[i].y + -16 < -16 and\
+                        abs(self.x - map_data[i].x) != 16:
                     forbidden_direction["S"] = True
                 return forbidden_direction
             else:
@@ -65,10 +65,11 @@ class App:
         px.load("assets/resource.pyxres")
         self.map = 0
         self.player = Player(112, 128)
+        self.map0 = map0.Map()
         px.run(self.update, self.draw)
 
     def update(self):
-        self.player.update()
+        self.player.update(self.map0.map_data)
 
     def draw(self):
         px.cls(0)
