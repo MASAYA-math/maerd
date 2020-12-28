@@ -10,7 +10,7 @@ class CollisionBlock(Block):
     pass
 
 
-class EventBlock(Block):
+class EventBlock(CollisionBlock):
     pass
 
 
