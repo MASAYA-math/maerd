@@ -19,6 +19,11 @@ class Map0(engine.Map):
     def __init__(self, app):
         super().__init__(app, map_data_source, events.events)
 
+    def update(self):
+        super().update()
+        if self.app.animations[0].is_playing:
+            self.app.player.x, self.app.player.y = 112, 128
+
     def draw(self):
         super().draw()
         px.bltm(-self.app.player.x+112,

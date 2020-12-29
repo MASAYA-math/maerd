@@ -81,7 +81,7 @@ class App:
         self.maps = [elm(self) for elm in maps]
         self.map_player_in_number = 0
         self.map_player_in = self.maps[self.map_player_in_number]
-        self. animations = animations
+        self.animations = animations
         px.run(self.update, self.draw)
 
     def update(self):
