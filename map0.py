@@ -13,9 +13,9 @@ map_data_source = [
     [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
 ]
 
-map_data = engine.make_map_instance(map_data_source, events.events)
+
+class Map0(engine.Map):
+    pass
 
 
-class Map:
-    def __init__(self):
-        self.map_data = map_data
+map0 = Map0(map_data_source, events.events)

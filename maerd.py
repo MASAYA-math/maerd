@@ -7,18 +7,8 @@ def convert_coordinates():
     pass
 
 
-def is_on_collision(player, map_data) -> list:
-    on_collision_list = []
-    for i in range(0, len(map_data)):
-        for j in range(0, len(map_data[i])):
-            if isinstance(map_data[i][j], engine.CollisionBlock) and\
-                    abs(player.x - j*16) <= 16 and abs(player.y - i*16) <= 16:
-                on_collision_list.append((i, j, map_data[i][j], True))
-    return on_collision_list
-
-
 class Map:
-    def __init__(self):
+    def __init__(self, map_data):
         pass
 
     def update(self):
@@ -33,8 +23,8 @@ class Player:
         self.x, self.y = x, y
         self.map_number = 0
 
-    def update(self, map_data):
-        self.collision_list = is_on_collision(self, map_data)
+    def update(self, collision_list):
+        self.collision_list = collision_list
         for elm in self.collision_list:
             if isinstance(elm[2], engine.EventBlock):
                 elm[2].update_event_handler(self)
@@ -77,11 +67,11 @@ class App:
         px.init(256, 256, caption="MAERD")
         px.load("assets/resource.pyxres")
         self.player = Player(112, 128)
-        self.map0 = map0.Map()
         px.run(self.update, self.draw)
 
     def update(self):
-        self.player.update(self.map0.map_data)
+        map0.map0.update(self.player)
+        self.player.update(map0.map0.on_collision_list)
 
     def draw(self):
         px.cls(0)
