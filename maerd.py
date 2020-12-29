@@ -69,7 +69,7 @@ class App:
     def draw(self):
         px.cls(0)
         if self.player.map_number == 0:
-            px.bltm(0, 0, 0, 0, 0, 32, 32)
+            self.map_player_in.draw()
             self.player.draw()
             px.blt(self.player.x + 16, self.player.y, 0, 0, 64, 16, 16, 0)
         else:

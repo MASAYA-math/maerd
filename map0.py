@@ -1,3 +1,4 @@
+import pyxel as px
 from engine import engine
 import events
 
@@ -15,7 +16,9 @@ map_data_source = [
 
 
 class Map0(engine.Map):
-    pass
+    def draw(self):
+        super().draw()
+        px.bltm(0, 0, 0, 0, 0, 32, 32)
 
 
 map = Map0(map_data_source, events.events)
