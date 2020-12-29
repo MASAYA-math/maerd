@@ -21,4 +21,4 @@ class Map1(engine.Map):
 
     def draw(self):
         super().draw()
-        px.text(64, 64, "NEXT STAGE", 8)
+        px.bltm(0, 0, 1, 0, 0, 64, 64)
