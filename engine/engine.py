@@ -61,4 +61,8 @@ class Map:
 
 
 class Animation:
-    pass
+    def update(self):
+        pass
+
+    def draw(self):
+        pass
