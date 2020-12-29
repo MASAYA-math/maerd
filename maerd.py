@@ -4,10 +4,6 @@ import map0
 import map1
 
 
-def convert_coordinates():
-    pass
-
-
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
@@ -26,7 +22,7 @@ class Player:
             self.y += 1
 
     def draw(self):
-        px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
+        px.blt(112, 128, 0, 0, 48, 16, 16, 0)
 
     def handle_collision(self, collision_list) -> dict:
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
