@@ -7,17 +7,6 @@ def convert_coordinates():
     pass
 
 
-class Map:
-    def __init__(self, map_data):
-        pass
-
-    def update(self):
-        pass
-
-    def draw(self):
-        pass
-
-
 class Player:
     def __init__(self, x, y):
         self.x, self.y = x, y
