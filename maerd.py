@@ -27,9 +27,9 @@ class App:
         px.cls(0)
         self.map_player_in.draw()
         self.player.draw()
+        px.blt(self.player.x + 16, self.player.y, 0, 0, 64, 16, 16, 0)
         for elm in self.animations:
             elm.draw()
-        px.blt(self.player.x + 16, self.player.y, 0, 0, 64, 16, 16, 0)
 
 
 App()

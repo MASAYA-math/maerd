@@ -13,6 +13,7 @@ class EventBlock0(CustomEventBlock, engine.CollisionBlock):
             app.map_player_in_number = 1
             app.map_player_in = app.maps[app.map_player_in_number]
             app.map_player_in.update()
+            app.animations[0].is_playing = True
 
 
 events = [EventBlock0]

@@ -61,6 +61,10 @@ class Map:
 
 
 class Animation:
+    def __init__(self):
+        self.tick_count = 0
+        self.is_playing = False
+
     def update(self):
         pass
 
