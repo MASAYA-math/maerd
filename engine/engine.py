@@ -1,3 +1,4 @@
+import pyxel as px
 
 
 class Block:
@@ -70,3 +71,28 @@ class Animation:
 
     def draw(self):
         pass
+
+
+class App:
+    def __init__(self, title, resource_file, player, maps, animations):
+        px.init(256, 256, caption=title)
+        px.load(resource_file)
+        self. player = player
+        self.maps = [elm(self) for elm in maps]
+        self.map_player_in_number = 0
+        self.map_player_in = self.maps[self.map_player_in_number]
+        self. animations = animations
+        px.run(self.update, self.draw)
+
+    def update(self):
+        self.map_player_in.update()
+        self.player.update(self.map_player_in.on_collision_list)
+        for elm in self.animations:
+            elm.update()
+
+    def draw(self):
+        px.cls(0)
+        self.map_player_in.draw()
+        self.player.draw()
+        for elm in self.animations:
+            elm.draw()
