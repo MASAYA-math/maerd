@@ -5,6 +5,7 @@ from engine import engine
 class Animation1(engine.Animation):
     def __init__(self):
         super().__init__()
+        self.is_playing = True
 
     def update(self):
         super().update()
