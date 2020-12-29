@@ -21,14 +21,15 @@ class EventBlock(Block):
 
 
 class Map:
-    def __init__(self, map_data_source, events):
+    def __init__(self, app, map_data_source, events):
+        self.app = app
         self.map_data = self.make_map_instance(map_data_source, events)
 
-    def update(self, player, app):
+    def update(self, player):
         self.on_collision_list = self.is_on_collision(player, self.map_data)
         for elm in self.on_collision_list:
             if isinstance(elm[2], EventBlock):
-                elm[2].update_event_handler(app)
+                elm[2].update_event_handler(self.app)
 
     def draw(self):
         for elm in self.on_collision_list:

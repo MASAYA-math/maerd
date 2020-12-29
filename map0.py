@@ -16,8 +16,8 @@ map_data_source = [
 
 
 class Map0(engine.Map):
-    def __init__(self):
-        super().__init__(map_data_source, events.events)
+    def __init__(self, app):
+        super().__init__(app, map_data_source, events.events)
 
     def draw(self):
         super().draw()
