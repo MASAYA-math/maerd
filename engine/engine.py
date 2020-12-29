@@ -28,11 +28,12 @@ class Map:
         self.on_collision_list = self.is_on_collision(player, self.map_data)
         for elm in self.on_collision_list:
             if isinstance(elm[2], EventBlock):
-                # TODO change self!
                 elm[2].update_event_handler(app)
 
     def draw(self):
-        pass
+        for elm in self.on_collision_list:
+            if isinstance(elm[2], EventBlock):
+                elm[2].draw_event_handler()
 
     def make_map_instance(self, source, events):
         map_data_instance = []
