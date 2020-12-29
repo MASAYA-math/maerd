@@ -52,7 +52,7 @@ class App:
         px.init(256, 256, caption="MAERD")
         px.load("assets/resource.pyxres")
         self.player = Player(112, 128)
-        self.maps = [map0.map, map1.map]
+        self.maps = [map0.Map0(), map1.Map1()]
         self.map_player_in_number = 0
         self.map_player_in = self.maps[self.map_player_in_number]
         px.run(self.update, self.draw)

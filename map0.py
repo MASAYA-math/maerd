@@ -16,9 +16,9 @@ map_data_source = [
 
 
 class Map0(engine.Map):
+    def __init__(self):
+        super().__init__(map_data_source, events.events)
+
     def draw(self):
         super().draw()
         px.bltm(0, 0, 0, 0, 0, 32, 32)
-
-
-map = Map0(map_data_source, events.events)

@@ -16,9 +16,9 @@ map_data_source = [
 
 
 class Map1(engine.Map):
+    def __init__(self):
+        super().__init__(map_data_source, events.events)
+
     def draw(self):
         super().draw()
         px.text(64, 64, "NEXT STAGE", 8)
-
-
-map = Map1(map_data_source, events.events)
