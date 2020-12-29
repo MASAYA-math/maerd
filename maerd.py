@@ -59,12 +59,12 @@ class App:
         px.init(256, 256, caption="MAERD")
         px.load("assets/resource.pyxres")
         self.player = Player(112, 128)
-        self.map_number = 0
+        self.map_player_in = maps[0]
         px.run(self.update, self.draw)
 
     def update(self):
-        maps[self.map_number].update(self.player)
-        self.player.update(maps[self.map_number].on_collision_list)
+        self.map_player_in.update(self.player)
+        self.player.update(self.map_player_in.on_collision_list)
 
     def draw(self):
         px.cls(0)
