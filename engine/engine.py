@@ -58,3 +58,7 @@ class Map:
                         abs(player.y - i*16) <= 16:
                     on_collision_list.append((i, j, map_data[i][j], True))
         return on_collision_list
+
+
+class Animation:
+    pass
