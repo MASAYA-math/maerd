@@ -47,18 +47,19 @@ class Player:
     def handle_collision(self, collision_list) -> dict:
         forbidden_direction = {"A": False, "D": False, "W": False, "S": False}
         for elm in collision_list:
-            if self.x - elm[1]*16 + 16 >= 16 and\
-                    abs(self.y - elm[0]*16) != 16:
-                forbidden_direction["A"] = True
-            if self.x - elm[1]*16 + -16 < -16 and\
-                    abs(self.y - elm[0]*16) != 16:
-                forbidden_direction["D"] = True
-            if self.y - elm[0]*16 + 16 >= 16 and\
-                    abs(self.x - elm[1]*16) != 16:
-                forbidden_direction["W"] = True
-            if self.y - elm[0]*16 + -16 < -16 and\
-                    abs(self.x - elm[1]*16) != 16:
-                forbidden_direction["S"] = True
+            if isinstance(elm[2], engine.CollisionBlock):
+                if self.x - elm[1]*16 + 16 >= 16 and\
+                        abs(self.y - elm[0]*16) != 16:
+                    forbidden_direction["A"] = True
+                if self.x - elm[1]*16 + -16 < -16 and\
+                        abs(self.y - elm[0]*16) != 16:
+                    forbidden_direction["D"] = True
+                if self.y - elm[0]*16 + 16 >= 16 and\
+                        abs(self.x - elm[1]*16) != 16:
+                    forbidden_direction["W"] = True
+                if self.y - elm[0]*16 + -16 < -16 and\
+                        abs(self.x - elm[1]*16) != 16:
+                    forbidden_direction["S"] = True
         return forbidden_direction
 
 

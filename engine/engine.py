@@ -47,9 +47,7 @@ class Map:
         on_collision_list = []
         for i in range(0, len(map_data)):
             for j in range(0, len(map_data[i])):
-                # TODO Remove condition "is CollisionBlock" and fix player's collision_handler for fit this.
-                if isinstance(map_data[i][j], CollisionBlock) and\
-                    abs(player.x - j*16) <= 16 and\
+                if abs(player.x - j*16) <= 16 and\
                         abs(player.y - i*16) <= 16:
                     on_collision_list.append((i, j, map_data[i][j], True))
         return on_collision_list
