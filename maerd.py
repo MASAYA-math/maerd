@@ -1,8 +1,9 @@
 import pyxel as px
 from engine import engine
 import map0
+import map1
 
-maps = [map0.map]
+maps = [map0.map, map1.map]
 
 
 def convert_coordinates():
@@ -16,9 +17,6 @@ class Player:
 
     def update(self, collision_list):
         self.collision_list = collision_list
-        for elm in self.collision_list:
-            if isinstance(elm[2], engine.EventBlock):
-                elm[2].update_event_handler(self)
         forbidden_direction = self.handle_collision(self.collision_list)
         if px.btn(px.KEY_D) and not forbidden_direction["D"]:
             self.x += 1
@@ -30,9 +28,6 @@ class Player:
             self.y += 1
 
     def draw(self):
-        for elm in self.collision_list:
-            if isinstance(elm[2], engine.EventBlock):
-                elm[2].draw_event_handler(self)
         px.blt(self.x, self.y, 0, 0, 48, 16, 16, 0)
 
     def handle_collision(self, collision_list) -> dict:
@@ -59,21 +54,20 @@ class App:
         px.init(256, 256, caption="MAERD")
         px.load("assets/resource.pyxres")
         self.player = Player(112, 128)
-        self.map_player_in = maps[0]
+        self.map_player_in_number = 0
+        self.map_player_in = maps[self.map_player_in_number]
         px.run(self.update, self.draw)
 
     def update(self):
-        self.map_player_in.update(self.player)
+        self.map_player_in.update(self.player, self)
         self.player.update(self.map_player_in.on_collision_list)
+        self.map_player_in = maps[self.map_player_in_number]
 
     def draw(self):
         px.cls(0)
-        if self.player.map_number == 0:
-            self.map_player_in.draw()
-            self.player.draw()
-            px.blt(self.player.x + 16, self.player.y, 0, 0, 64, 16, 16, 0)
-        else:
-            px.text(64, 64, "NEXT STAGE", 8)
+        self.map_player_in.draw()
+        self.player.draw()
+        px.blt(self.player.x + 16, self.player.y, 0, 0, 64, 16, 16, 0)
 
 
 App()
