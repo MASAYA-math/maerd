@@ -21,5 +21,5 @@ class Map0(engine.Map):
 
     def draw(self):
         super().draw()
-        px.bltm(0 - self.app.player.x+112, 0 -
-                self.app.player.y+128, 0, 0, 0, 32, 32)
+        px.bltm(-self.app.player.x+112,
+                -self.app.player.y+128, 0, 0, 0, 32, 32)
