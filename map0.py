@@ -18,4 +18,4 @@ class Map0(engine.Map):
     pass
 
 
-map0 = Map0(map_data_source, events.events)
+map = Map0(map_data_source, events.events)

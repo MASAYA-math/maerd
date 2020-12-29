@@ -2,6 +2,8 @@ import pyxel as px
 from engine import engine
 import map0
 
+maps = [map0.map]
+
 
 def convert_coordinates():
     pass
@@ -57,11 +59,12 @@ class App:
         px.init(256, 256, caption="MAERD")
         px.load("assets/resource.pyxres")
         self.player = Player(112, 128)
+        self.map_number = 0
         px.run(self.update, self.draw)
 
     def update(self):
-        map0.map0.update(self.player)
-        self.player.update(map0.map0.on_collision_list)
+        maps[self.map_number].update(self.player)
+        self.player.update(maps[self.map_number].on_collision_list)
 
     def draw(self):
         px.cls(0)
