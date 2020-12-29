@@ -56,7 +56,6 @@ class App:
     def update(self):
         self.map_player_in.update()
         self.player.update(self.map_player_in.on_collision_list)
-        self.map_player_in = self.maps[self.map_player_in_number]
 
     def draw(self):
         px.cls(0)
