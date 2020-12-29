@@ -25,8 +25,9 @@ class Map:
         self.app = app
         self.map_data = self.make_map_instance(map_data_source, events)
 
-    def update(self, player):
-        self.on_collision_list = self.is_on_collision(player, self.map_data)
+    def update(self):
+        self.on_collision_list = self.is_on_collision(
+            self.app.player, self.map_data)
         for elm in self.on_collision_list:
             if isinstance(elm[2], EventBlock):
                 elm[2].update_event_handler(self.app)
