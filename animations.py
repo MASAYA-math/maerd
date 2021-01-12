@@ -13,6 +13,7 @@ class Animation1(engine.Animation):
             self.tick_count += 1
         if self.tick_count >= 60:
             self.is_playing = False
+            self.tick_count = 0
 
     def draw(self):
         super().draw()
