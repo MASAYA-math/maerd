@@ -1,4 +1,3 @@
-import pyxel as px
 from engine import engine
 import map0
 import map1
